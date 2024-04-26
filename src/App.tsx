@@ -1,3 +1,4 @@
+import Articles from "./components/Articles/Articles";
 import Banners from "./components/Banners/Banners";
 import Header from "./components/Header/Header";
 
@@ -8,6 +9,7 @@ function App() {
 
       <main>
         <Banners />
+        <Articles />
       </main>
     </div>
   );

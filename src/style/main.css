@@ -5,5 +5,19 @@
 @tailwind utilities;
 
 .container {
-    @apply max-w-6xl mx-auto px-2
+  @apply max-w-6xl mx-auto px-2;
+}
+
+.hint {
+  @apply absolute top-8 left-5 text-xs font-normal py-1 px-3 bg-hintColor rounded-sm;
+}
+
+.title-3 {
+  @apply text-lg font-bold mb-6;
+}
+
+@layer components {
+  .btns {
+    @apply block mt-3 font-bold text-sm text-white rounded py-4 text-center  bg-btns hover:opacity-80 transition-all;
+  }
 }

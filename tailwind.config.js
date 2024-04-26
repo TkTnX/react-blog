@@ -8,10 +8,11 @@ export default {
       },
       colors: {
         hintColor: "#4a90e2",
+        btns: "#232323",
       },
       screens: {
-        vsm: "468px"
-      }
+        vsm: "468px",
+      },
     },
   },
   plugins: [],
