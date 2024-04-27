@@ -9,7 +9,6 @@ import instaImg from "./images/insta.svg";
 import car01 from "/images/footer/01.jpg";
 import car02 from "/images/footer/02.jpg";
 import car03 from "/images/footer/03.jpg";
-import Newsletter from "../Newsletter/Newsletter";
 import FooterCopyright from "../FooterCopyright/FooterCopyright";
 
 const Footer: React.FC = () => {
