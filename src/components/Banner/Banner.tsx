@@ -15,10 +15,8 @@ const Banner: React.FC<BannerType> = ({ img, title, date, author }) => {
     >
       <div className="absolute left-0 top-0 w-full h-full  z-1 bg-gradient-to-b from-black/10 to-black/70 hover:blur-2xl transition-all"></div>
       <img src={img} alt="car" />
-      <p className="hint">
-        Vehicle
-      </p>
-      <div className="absolute bottom-6 left-5 right-9 z-20">
+      <p className="hint">Vehicle</p>
+      <div className="absolute bottom-6 left-5 right-9 z-9">
         <p className="text-sm hidden md:block font-normal mb-1">
           {author} - {date}
         </p>

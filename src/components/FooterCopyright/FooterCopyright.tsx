@@ -1,16 +1,17 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 const FooterCopyright: React.FC = () => {
   return (
     <div className="bg-black text-white py-9">
       <div className="container grid text-center justify-center gap-4 md:flex md:justify-between">
-        <p>@2019 Logwork. All Right Reserved.</p>
+        <p>@2024 Logwork. All Right Reserved.</p>
         <nav className="hidden vsm:block">
           <ul className="flex gap-10">
             <li>
-              <a className="hover:opacity-80 transition-all" href="#">
+              <Link to="/" className="hover:opacity-80 transition-all">
                 Home
-              </a>
+              </Link>
             </li>
             <li>
               <a className="hover:opacity-80 transition-all" href="#">

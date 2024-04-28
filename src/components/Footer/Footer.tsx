@@ -10,6 +10,7 @@ import car01 from "/images/footer/01.jpg";
 import car02 from "/images/footer/02.jpg";
 import car03 from "/images/footer/03.jpg";
 import FooterCopyright from "../FooterCopyright/FooterCopyright";
+import { Link } from "react-router-dom";
 
 const Footer: React.FC = () => {
   return (
@@ -17,13 +18,13 @@ const Footer: React.FC = () => {
       <footer className="bg-btns pt-16 pb-12 text-white mt-40">
         <div className="container flex justify-center gap-10 flex-wrap lg:grid lg:grid-cols-3">
           <div>
-            <a
-              href="#!"
+            <Link
+              to="/"
               className="flex items-center gap-1 hover:opacity-80 transition-all"
             >
               <h6>Premium</h6>
               <span className="bg-hintColor rounded-md p-1">CAR</span>
-            </a>
+            </Link>
             <p className="mt-7 max-w-64 opacity-45 font-normal text-sm">
               Short description about the company Lorem Ipsum is simply dummy
               text of the printing and typesetting industry.

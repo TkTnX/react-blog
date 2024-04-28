@@ -1,20 +1,21 @@
-import Articles from "./components/Articles/Articles";
-import Banners from "./components/Banners/Banners";
-import Footer from "./components/Footer/Footer";
+import { Route, Routes } from "react-router-dom";
+import Home from "./pages/Home/Home";
+import Registration from "./pages/Registration/Registration";
 import Header from "./components/Header/Header";
+import Footer from "./components/Footer/Footer";
+import Login from "./pages/Login/Login";
 
 function App() {
   return (
-    <div className="font-main">
+    <>
       <Header />
-
-      <main>
-        <Banners />
-        <Articles />
-      </main>
-
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/auth/registration" element={<Registration />} />
+        <Route path="/auth/login" element={<Login />} />
+      </Routes>
       <Footer />
-    </div>
+    </>
   );
 }
 
