@@ -3,6 +3,7 @@ import Post, { PostType } from "../Post/Post";
 import axios from "axios";
 import PostSkeleton from "../PostSkeleton/PostSkeleton";
 import Pagination from "../Pagination/Pagination";
+import { Link } from "react-router-dom";
 
 const Posts: React.FC = () => {
   const [posts, setPosts] = useState([]);
@@ -30,12 +31,13 @@ const Posts: React.FC = () => {
       <div className="grid gap-3 vsm:gap-44">
         {isLoading
           ? [...new Array(3)].map((_, i) => <PostSkeleton key={i} />)
-          : posts.map((post: PostType) => <Post key={post.id} {...post} />)}
+          : posts.map((post: PostType) => (
+              <Link key={post.id} to={`/post/${post.id}`}>
+                <Post {...post} />
+              </Link>
+            ))}
       </div>
-      <Pagination
-        setCurrentPage={setCurrentPage}
-        pageCount={pageCount}
-      />
+      <Pagination setCurrentPage={setCurrentPage} pageCount={pageCount} />
     </>
   );
 };

@@ -11,27 +11,30 @@ const InstagramPhotos: React.FC = () => {
   return (
     <div className="mt-14">
       <h3 className="title-3">Instagram</h3>
-      <ul className="grid grid-cols-2 gap-3">
-        <li>
+      <ul className="grid grid-cols-2 gap-3 justify-between">
+        <li className="justify-self-center">
           <img src={inst01} alt="img" />
         </li>
-        <li>
+        <li className="justify-self-center">
           <img src={inst02} alt="img" />
         </li>
-        <li>
+        <li className="justify-self-center">
           <img src={inst03} alt="img" />
         </li>
-        <li>
+        <li className="justify-self-center">
           <img src={inst04} alt="img" />
         </li>
-        <li>
+        <li className="justify-self-center">
           <img src={inst05} alt="img" />
         </li>
-        <li>
+        <li className="justify-self-center">
           <img src={inst06} alt="img" />
         </li>
       </ul>
-      <a className="btns flex items-center justify-center gap-3" href="#!">
+      <a
+        className="btns flex items-center justify-center gap-3 w-full"
+        href="#!"
+      >
         <img src="/images/icons/insta.svg" alt="Instagram" />
         <p>View instagram</p>
       </a>

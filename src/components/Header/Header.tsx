@@ -70,9 +70,9 @@ const Header: React.FC = () => {
         <nav className="hidden md:block">
           <ul className="flex gap-10">
             <li>
-              <a className="hover:opacity-80 transition-all" href="#">
+              <Link to="/" className="hover:opacity-80 transition-all">
                 Home
-              </a>
+              </Link>
             </li>
             <li>
               <a className="hover:opacity-80 transition-all" href="#">

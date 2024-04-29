@@ -4,6 +4,7 @@ import Registration from "./pages/Registration/Registration";
 import Header from "./components/Header/Header";
 import Footer from "./components/Footer/Footer";
 import Login from "./pages/Login/Login";
+import FullPost from "./pages/FullPost/FullPost";
 
 function App() {
   return (
@@ -11,6 +12,7 @@ function App() {
       <Header />
       <Routes>
         <Route path="/" element={<Home />} />
+        <Route path="/post/:id" element={<FullPost />} />
         <Route path="/auth/registration" element={<Registration />} />
         <Route path="/auth/login" element={<Login />} />
       </Routes>
