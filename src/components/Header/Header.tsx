@@ -1,9 +1,12 @@
 import React, { useState } from "react";
-import searchImg from "./images/search.svg";
 import userImg from "./images/suer.svg";
 import { Link } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { changeIsAuth, isAuthSelector } from "../../redux/slices/auth";
 const Header: React.FC = () => {
   const [openModal, setOpenModal] = useState(false);
+  const isAuth = useSelector(isAuthSelector);
+  const dispatch = useDispatch();
 
   openModal
     ? (document.body.style.overflow = "hidden")
@@ -97,16 +100,30 @@ const Header: React.FC = () => {
           </ul>
         </nav>
 
-        <div className="flex items-center gap-6">
-          <button type="button" className="hover:opacity-80 transition-all">
-            <img src={searchImg} alt="Search..." />
-          </button>
-          <Link
-            to="/auth/registration"
-            className="hover:opacity-80 transition-all"
-          >
-            <img src={userImg} alt="Account" />
-          </Link>
+        <div className="grid text-center vsm:flex items-center gap-1 vsm:gap-6">
+          {isAuth ? (
+            <>
+              <Link
+                to="/add-post"
+                className="bg-white text-black p-2 rounded hover:opacity-80 transition-all"
+              >
+                Создать пост
+              </Link>
+              <button
+                onClick={() => dispatch(changeIsAuth(false))}
+                className="p-2 bg-red-600 rounded text-white self-start hover:opacity-80 transition-all"
+              >
+                Выйти из аккаунта
+              </button>
+            </>
+          ) : (
+            <Link
+              to="/auth/registration"
+              className="hover:opacity-80 transition-all"
+            >
+              <img src={userImg} alt="Account" />
+            </Link>
+          )}
         </div>
       </div>
     </header>

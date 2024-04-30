@@ -1,7 +1,16 @@
 import React from "react";
 import AuthForm from "../../components/AuthForm/AuthForm";
+import { useSelector } from "react-redux";
+import { isAuthSelector } from "../../redux/slices/auth";
+import { Navigate } from "react-router-dom";
 
 const Registration: React.FC = () => {
+  const isAuth = useSelector(isAuthSelector);
+
+  if (isAuth) {
+    return <Navigate to="/" />;
+  }
+
   return (
     <>
       <AuthForm title="Registration" type="Reg" btnText="Register">
@@ -10,7 +19,7 @@ const Registration: React.FC = () => {
           type="text"
           placeholder="Login"
         />
-          </AuthForm>
+      </AuthForm>
     </>
   );
 };
