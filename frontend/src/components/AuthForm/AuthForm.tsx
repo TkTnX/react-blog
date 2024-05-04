@@ -19,12 +19,12 @@ const AuthForm: React.FC<AuthFormProps> = ({
       <h2 className="font-normal text-3xl mb-8">{title}</h2>
 
       <form className="grid gap-3">
+        {children}
         <input
           className="px-2 py-3 bg-white rounded text-black"
           type="email"
           placeholder="Email"
         />
-        {children}
         <input
           className="px-2 py-3 bg-white rounded text-black"
           type="password"
