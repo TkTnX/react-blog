@@ -1,5 +1,9 @@
 import React from "react";
 import eyeImg from "./eye.svg";
+import binImg from "./bin.svg";
+import editImg from "./edit.svg";
+import "./style.css";
+import { Link } from "react-router-dom";
 export type PostType = {
   _id: string;
   imageUrl: string;
@@ -23,9 +27,29 @@ const Post: React.FC<PostType> = ({
   createdAt,
   text,
   viewsCount,
+  _id,
 }) => {
   return (
-    <div className=" max-w-3xl relative rounded-md">
+    <div className="card max-w-3xl relative rounded-md">
+      <div className="absolute right-2 top-2 flex items-center gap-4 z-10">
+        <Link
+          to={`/posts/${_id}/edit`}
+          className="hover:opacity-45 transition-all"
+        >
+          <img
+            className="opacity-0 transition-all p-1 rounded-full  bg-yellow-400 max-w-8"
+            src={editImg}
+            alt="Edit post"
+          />
+        </Link>
+        <button className="hover:opacity-45 transition-all">
+          <img
+            className=" opacity-0 transition-all p-1 rounded-full bg-red-600 max-w-8"
+            src={binImg}
+            alt="Delete post"
+          />
+        </button>
+      </div>
       {!imageUrl ? (
         <img
           className="w-full rounded-md"

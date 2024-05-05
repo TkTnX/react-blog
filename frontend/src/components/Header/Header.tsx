@@ -12,6 +12,11 @@ const Header: React.FC = () => {
     ? (document.body.style.overflow = "hidden")
     : (document.body.style.overflow = "visible");
 
+  const onClickLogout = () => {
+    dispatch(changeIsAuth());
+    localStorage.removeItem("token")
+    }
+  
   return (
     <header className="bg-black py-9 text-white text-sm font-normal">
       <div className="container flex justify-between gap-3 items-center">
@@ -110,7 +115,7 @@ const Header: React.FC = () => {
                 Создать пост
               </Link>
               <button
-                onClick={() => dispatch(changeIsAuth(false))}
+                onClick={onClickLogout}
                 className="p-2 bg-red-600 rounded text-white self-start hover:opacity-80 transition-all"
               >
                 Выйти из аккаунта

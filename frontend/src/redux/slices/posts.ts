@@ -43,7 +43,7 @@ const postsSlice = createSlice({
       state.posts.status = "error";
       state.posts.items = [];
     });
-        // получение
+        // получение тегов
     builder.addCase(fetchTags.pending, (state) => {
       state.tags.status = "loading";
       state.tags.items = [];
