@@ -1,27 +1,20 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import Post, { PostType } from "../Post/Post";
-import axios from "axios";
 import PostSkeleton from "../PostSkeleton/PostSkeleton";
-import Pagination from "../Pagination/Pagination";
 import { Link } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { fetchPosts } from "../../redux/slices/posts";
+import { RootState } from "../../redux/store";
 
 const Posts: React.FC = () => {
-  const [posts, setPosts] = useState([]);
-  const [isLoading, setIsLoading] = useState(true);
-  const [currentPage, setCurrentPage] = useState(1)
-  const [pageCount, setPageCount] = useState(0)
-
+  const dispatch = useDispatch();
+  const { posts } = useSelector((state: RootState) => state.posts);
+  const isLoadingPost = posts.status === "loading";
   try {
     useEffect(() => {
-      axios
-        .get(`https://da4cb1e205f698ff.mokky.dev/posts?limit=5&page=${currentPage}`)
-        .then(({data}) => {
-          setPosts(data.items);
-          setPageCount(data.meta.total_pages)
-          console.log(currentPage)
-        })
-        .finally(() => setIsLoading(false));
-    }, [currentPage]);
+      // @ts-ignore
+      dispatch(fetchPosts());
+    }, []);
   } catch (error) {
     console.log(`ERROR >>>> ${error}`);
   }
@@ -29,15 +22,17 @@ const Posts: React.FC = () => {
   return (
     <>
       <div className="grid gap-3 vsm:gap-44">
-        {isLoading
-          ? [...new Array(3)].map((_, i) => <PostSkeleton key={i} />)
-          : posts.map((post: PostType) => (
-              <Link key={post.id} to={`/post/${post.id}`}>
+        {(isLoadingPost ? [...new Array(3)] : posts.items).map(
+          (post: PostType, i) =>
+            isLoadingPost ? (
+              <PostSkeleton key={i} />
+            ) : (
+              <Link key={post._id} to={`/post/${post._id}`}>
                 <Post {...post} />
               </Link>
-            ))}
+            )
+        )}
       </div>
-      <Pagination setCurrentPage={setCurrentPage} pageCount={pageCount} />
     </>
   );
 };

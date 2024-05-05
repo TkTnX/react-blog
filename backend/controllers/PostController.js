@@ -1,11 +1,29 @@
 import PostModel from "../models/Post.js";
 
+export const getLastTags = async (req, res) => {
+  try {
+    const posts = await PostModel.find().limit(10).exec();
+
+    const tags = posts
+      .map((obj) => obj.tags)
+      .flat()
+      .splice(0, 10);
+
+    res.json(tags);
+  } catch (error) {
+    console.log(error);
+    res.json({
+      message: "Не удалось получить теги",
+    });
+  }
+};
+
 export const getAll = async (req, res) => {
   try {
     const posts = await PostModel.find()
       .populate({
         path: "user",
-        select: ["name", "avatar"],
+        select: ["fullName", "avatarUrl"],
       })
       .exec();
 
@@ -33,23 +51,29 @@ export const getOne = async (req, res) => {
       {
         returnDocument: "after",
       }
-    ).then((doc, err) => {
-      if (err) {
-        console.log(err);
-        return res.status(500).json({
-          message: "Не удалось получить статью",
-        });
-      }
+    )
+      .populate({
+        path: "user",
+        select: ["fullName", "avatarUrl"],
+      })
+      .exec()
+      .then((doc, err) => {
+        if (err) {
+          console.log(err);
+          return res.status(500).json({
+            message: "Не удалось получить статью",
+          });
+        }
 
-      if (!doc) {
-        console.log(err);
-        return res.status(404).json({
-          message: "Статья не найдена",
-        });
-      }
+        if (!doc) {
+          console.log(err);
+          return res.status(404).json({
+            message: "Статья не найдена",
+          });
+        }
 
-      res.json(doc);
-    });
+        res.json(doc);
+      });
   } catch (error) {
     console.log(error);
     res.json({

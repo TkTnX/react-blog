@@ -1,51 +1,61 @@
-import axios from "axios";
+import axios from "../../axios";
 import React, { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { PostType } from "../../components/Post/Post";
-
-import viewsImg from "./images/views.svg";
+import eyeImg from "./images/eye.svg";
 import ContentLoader from "react-content-loader";
-
 const FullPost: React.FC = () => {
   const [data, setData] = useState<PostType | null>(null);
   const [isLoading, setIsLoading] = useState(true);
   const { id } = useParams();
   const navigate = useNavigate();
 
-  useEffect(() => {
-    axios
-      .get(`https://da4cb1e205f698ff.mokky.dev/posts/${id}`)
-      .then((res) => {
-        setData(res.data);
-          setIsLoading(false);
-          window.scrollTo(0, 0)
-      })
-      .catch((err) => {
-        console.log(err);
-        alert("Ошибка при получении статьи!");
-        navigate("/");
+  try {
+    useEffect(() => {
+      window.scrollTo(0, 0);
+      axios.get(`/posts/${id}`).then(({ data }) => {
+        setData(data);
+        setIsLoading(false);
       });
-  }, []);
+    }, []);
+  } catch (error) {
+    console.log(error);
+    alert("Ошибка при получении статьи!");
+    navigate("/");
+  }
 
   if (isLoading || !data) {
-    return <ContentLoader />;
+    return (
+      <div className="container">
+        <ContentLoader />
+      </div>
+    );
   }
   return (
     <div>
       <div className="container">
-        <div className="max-w-4xl mx-auto mt-7">
-          <img className="w-full" src={data.img} alt={data.title} />
+        <div className="max-w-4xl mx-auto my-10">
+          {data.imageUrl && (
+            <img className="w-full" src={data.imageUrl} alt={data.title} />
+          )}
 
           <h2 className="text-2xl md:text-5xl font-bold mt-3">{data.title}</h2>
-          <p className="mt-5 text-smz md:text-lg font-medium">{data.description}</p>
+          <p className="mt-5 text-smz md:text-lg font-medium">{data.text}</p>
           <div className="flex items-center justify-between">
-            <p className="mt-4">
-              {data.author} - {data.date}
-            </p>
-            <div className="flex gap-3 mt-4">
-              <img src={viewsImg} alt="views" />
-              <p className="font-bold">12</p>
+            <div className="mt-4 italic flex items-center gap-2 text-slate-500 text-sm font-normal">
+              <img
+                className="max-w-9 rounded-full overflow-hidden"
+                src={data.user.avatarUrl}
+                alt={data.user.fullName}
+              />{" "}
+              <div className="flex flex-col">
+                <p>{data.user.fullName}</p> <p>{data.createdAt}</p>
+              </div>
             </div>
+            <p className="flex items-center gap-2">
+              {data.viewsCount}{" "}
+              <img className=" max-w-6" src={eyeImg} alt="Глаз" />
+            </p>
           </div>
         </div>
       </div>
