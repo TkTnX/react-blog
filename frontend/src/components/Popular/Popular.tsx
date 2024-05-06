@@ -19,7 +19,7 @@ const Popular: React.FC = () => {
       <h3 className="title-3">Popular posts</h3>
       <ul className="grid gap-8">
         {posts.map((post: PostType) => (
-          <PopularPost key={post.id} {...post} />
+          <PopularPost key={post._id} {...post} />
         ))}
       </ul>
     </div>
