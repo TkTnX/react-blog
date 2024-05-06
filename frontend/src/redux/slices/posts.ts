@@ -1,6 +1,5 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "../../axios";
-import { RootState } from "../store";
 
 export const fetchPosts = createAsyncThunk("posts/fetchPosts", async () => {
   const { data } = await axios.get("/posts");
@@ -13,6 +12,11 @@ export const fetchTags = createAsyncThunk("tags/fetchTags", async () => {
 
   return data;
 });
+
+export const fetchRemovePost = createAsyncThunk(
+  "posts/fetchRemovePost",
+  async (id) => await axios.delete(`/posts/${id}`)
+);
 
 const initialState = {
   posts: {
@@ -29,7 +33,7 @@ const postsSlice = createSlice({
   name: "posts",
   initialState,
   reducers: {},
-    extraReducers: (builder) => {
+  extraReducers: (builder) => {
     //   получение постов
     builder.addCase(fetchPosts.pending, (state) => {
       state.posts.status = "loading";
@@ -43,7 +47,7 @@ const postsSlice = createSlice({
       state.posts.status = "error";
       state.posts.items = [];
     });
-        // получение тегов
+    // получение тегов
     builder.addCase(fetchTags.pending, (state) => {
       state.tags.status = "loading";
       state.tags.items = [];
@@ -56,8 +60,15 @@ const postsSlice = createSlice({
       state.tags.status = "error";
       state.tags.items = [];
     });
+    // Удаление поста
+
+    builder.addCase(fetchRemovePost.pending, (state, action) => {
+      state.posts.items = state.posts.items.filter(
+        // @ts-ignore
+        (obj: { _id: number }) => obj._id !== action.meta.arg
+      );
+    });
   },
 });
-
 
 export const postsReducer = postsSlice.reducer;

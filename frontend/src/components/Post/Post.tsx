@@ -4,6 +4,10 @@ import binImg from "./bin.svg";
 import editImg from "./edit.svg";
 import "./style.css";
 import { Link } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { RootState } from "../../redux/store";
+import ReactMarkdown from "react-markdown";
+import { fetchRemovePost } from "../../redux/slices/posts";
 export type PostType = {
   _id: string;
   imageUrl: string;
@@ -29,35 +33,59 @@ const Post: React.FC<PostType> = ({
   viewsCount,
   _id,
 }) => {
+  const dispatch = useDispatch();
+  const userData = useSelector((state: RootState) => state.auth.data);
+
+  const onClickRemove = () => {
+    if (window.confirm("Вы действительно хотите удалить пост?")) {
+      // @ts-ignore
+      dispatch(fetchRemovePost(_id));
+    }
+  };
+
   return (
     <div className="card max-w-3xl relative rounded-md">
-      <div className="absolute right-2 top-2 flex items-center gap-4 z-10">
-        <Link
-          to={`/posts/${_id}/edit`}
-          className="hover:opacity-45 transition-all"
-        >
+      {/* @ts-ignore */}
+      {userData?._id === user._id && (
+        <div className="absolute right-2 top-2 flex items-center gap-4 z-10">
+          <Link
+            to={`/posts/${_id}/edit`}
+            className="hover:opacity-45 transition-all"
+          >
+            <img
+              className="opacity-0 transition-all p-1 rounded-full  bg-yellow-400 max-w-8"
+              src={editImg}
+              alt="Edit post"
+            />
+          </Link>
+          <button
+            onClick={onClickRemove}
+            className="hover:opacity-45 transition-all relative z-10"
+          >
+            <img
+              className=" opacity-0 transition-all p-1 rounded-full bg-red-600 max-w-8"
+              src={binImg}
+              alt="Delete post"
+            />
+          </button>
+        </div>
+      )}
+      {!imageUrl ? (
+        <Link to={`/post/${_id}`}>
           <img
-            className="opacity-0 transition-all p-1 rounded-full  bg-yellow-400 max-w-8"
-            src={editImg}
-            alt="Edit post"
+            className="w-full rounded-md"
+            src="/images/posts/01.jpg"
+            alt="Car"
           />
         </Link>
-        <button className="hover:opacity-45 transition-all">
-          <img
-            className=" opacity-0 transition-all p-1 rounded-full bg-red-600 max-w-8"
-            src={binImg}
-            alt="Delete post"
-          />
-        </button>
-      </div>
-      {!imageUrl ? (
-        <img
-          className="w-full rounded-md"
-          src="/images/posts/01.jpg"
-          alt="Car"
-        />
       ) : (
-        <img className="w-full rounded-md" src={imageUrl} alt="Car" />
+        <Link to={`/post/${_id}`}>
+          <img
+            className="w-full rounded-md"
+            src={`http://localhost:4444${imageUrl}`}
+            alt="Car"
+          />
+        </Link>
       )}
 
       <div className=" vsm:absolute -bottom-32 left-5 right-5 rounded-md bg-white p-8">
@@ -75,10 +103,12 @@ const Post: React.FC<PostType> = ({
             </div>
           </div>
           <p className="flex items-center gap-2">
-            {viewsCount} <img className=" max-w-6" src={eyeImg} alt="Глаз" />
+            {viewsCount} <img className="max-w-6" src={eyeImg} alt="Глаз" />
           </p>
         </div>
-        <p className="mt-4 text-slate-500 text-sm font-normal">{text}</p>
+        <div className="mt-4 text-slate-500 text-sm font-normal">
+          <ReactMarkdown children={text} />
+        </div>
       </div>
     </div>
   );

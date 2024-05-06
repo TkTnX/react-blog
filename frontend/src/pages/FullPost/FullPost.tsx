@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { PostType } from "../../components/Post/Post";
 import eyeImg from "./images/eye.svg";
+import ReactMarkdown from "react-markdown";
 import ContentLoader from "react-content-loader";
 const FullPost: React.FC = () => {
   const [data, setData] = useState<PostType | null>(null);
@@ -36,11 +37,17 @@ const FullPost: React.FC = () => {
       <div className="container">
         <div className="max-w-4xl mx-auto my-10">
           {data.imageUrl && (
-            <img className="w-full" src={data.imageUrl} alt={data.title} />
+            <img
+              className="w-full"
+              src={`http://localhost:4444${data.imageUrl}`}
+              alt={data.title}
+            />
           )}
 
           <h2 className="text-2xl md:text-5xl font-bold mt-3">{data.title}</h2>
-          <p className="mt-5 text-smz md:text-lg font-medium">{data.text}</p>
+          <div className="mt-5 text-smz md:text-lg font-medium">
+            <ReactMarkdown children={data.text} />
+          </div>
           <div className="flex items-center justify-between">
             <div className="mt-4 italic flex items-center gap-2 text-slate-500 text-sm font-normal">
               <img
