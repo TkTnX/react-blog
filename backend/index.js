@@ -57,6 +57,12 @@ app.post("/upload", checkAuth, upload.single("image"), (req, res) => {
   });
 });
 
+app.post("/avatars", upload.single("image"), (req, res) => {
+  res.json({
+    url: `/uploads/${req.file.originalname}`,
+  });
+});
+
 app.get("/tags", PostController.getLastTags);
 app.get("/posts/tags", PostController.getLastTags);
 app.get("/posts", PostController.getAll);
