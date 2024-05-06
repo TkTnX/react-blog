@@ -2,10 +2,11 @@
 
 ## Сайт, в котором я постараюсь сделать блог про машины. Впервые буду делать стили с использованием tailwind. Также впервые подключу свой backend на проект
 
-[Сайт](https://timur-react-blog.netlify.app)
-
+[Сайт](https://timur-react-blog.vercel.app/)
 
 Загрузить бекенд на сервер снова не получилось :(
+
+Backend
 
 ```js
 cd backend // папка с беком
@@ -18,8 +19,3 @@ npm i // для установки пакетов
 ```js
 npm run start:dev // для запуска проекта
 ```
-
-```js
-https://mern-blog-lovat.vercel.app/ // ссылка на сайт.
-```
-
