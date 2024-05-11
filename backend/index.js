@@ -90,5 +90,9 @@ app.listen(PORT, (err) => {
     return console.log(err);
   }
 
-  console.log(`Сервер запущен: http://localhost:${PORT}`);
+  console.log(
+    `Сервер запущен: ${
+      "https://react-blog-rrdj.onrender.com" || `http://localhost:${PORT}`
+    } `
+  );
 });
