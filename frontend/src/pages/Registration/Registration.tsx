@@ -71,7 +71,7 @@ const Registration: React.FC = () => {
           {avatarUrl === "" ? (
             <img src={userImg} alt="user" />
           ) : (
-            <img src={`http://localhost:4444${avatarUrl}`} alt="user" />
+            <img src={`https://react-blog-rrdj.onrender.com${avatarUrl}`} alt="user" />
           )}
         </button>
         <input

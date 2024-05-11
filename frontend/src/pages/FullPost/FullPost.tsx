@@ -39,7 +39,7 @@ const FullPost: React.FC = () => {
           {data.imageUrl && (
             <img
               className="w-full"
-              src={`http://localhost:4444${data.imageUrl}`}
+              src={`https://react-blog-rrdj.onrender.com${data.imageUrl}`}
               alt={data.title}
             />
           )}

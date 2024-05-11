@@ -133,7 +133,7 @@ const AddPost: React.FC = () => {
           {imageUrl !== "" && (
             <img
               className="mb-1 max-w-lg relative "
-              src={`http://localhost:4444${imageUrl}`}
+              src={`https://react-blog-rrdj.onrender.com${imageUrl}`}
               alt="preview"
             />
           )}

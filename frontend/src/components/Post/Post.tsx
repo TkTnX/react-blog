@@ -82,7 +82,7 @@ const Post: React.FC<PostType> = ({
         <Link to={`/post/${_id}`}>
           <img
             className="w-full rounded-md"
-            src={`http://localhost:4444${imageUrl}`}
+            src={`https://react-blog-rrdj.onrender.com${imageUrl}`}
             alt="Car"
           />
         </Link>
