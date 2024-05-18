@@ -31,7 +31,7 @@ const AddPost: React.FC = () => {
       const file = event.target.files[0];
       formData.append("image", file);
       const { data } = await axios.post(
-        `${import.meta.env.URL}/upload`,
+        `${import.meta.env.VITE_URL}/upload`,
         formData
       );
       setImageUrl(data.url);
@@ -51,8 +51,8 @@ const AddPost: React.FC = () => {
       };
 
       const { data } = isEditing
-        ? await axios.patch(`${import.meta.env.URL}/posts/${id}`, fields)
-        : await axios.post(`${import.meta.env.URL}/posts`, fields);
+        ? await axios.patch(`${import.meta.env.VITE_URL}/posts/${id}`, fields)
+        : await axios.post(`${import.meta.env.VITE_URL}/posts`, fields);
       const _id = isEditing ? id : data._id;
       navigate(`/post/${_id}`);
     } catch (error) {

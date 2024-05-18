@@ -4,28 +4,27 @@ import axios from "../../axios";
 
 export const fetchAuth = createAsyncThunk("auth/fetchAuth", async (params) => {
   const { data } = await axios.post(
-    `${import.meta.env.URL}/auth/login`,
+    `${import.meta.env.VITE_URL}/auth/login`,
     params
   );
   return data;
 });
 
-export const fetchRegister = createAsyncThunk("auth/fetchRegister", async (params) => {
-  const { data } = await axios.post(
-    `${import.meta.env.URL}/auth/register`,
-    params
-  );
-  return data;
-});
-
-
-export const fetchAuthMe = createAsyncThunk(
-  "auth/fetchAuthMe",
-  async () => {
-    const { data } = await axios.get(`${import.meta.env.URL}/auth/me`);
+export const fetchRegister = createAsyncThunk(
+  "auth/fetchRegister",
+  async (params) => {
+    const { data } = await axios.post(
+      `${import.meta.env.VITE_URL}/auth/register`,
+      params
+    );
     return data;
   }
 );
+
+export const fetchAuthMe = createAsyncThunk("auth/fetchAuthMe", async () => {
+  const { data } = await axios.get(`${import.meta.env.VITE_URL}/auth/me`);
+  return data;
+});
 
 const initialState = {
   data: null,

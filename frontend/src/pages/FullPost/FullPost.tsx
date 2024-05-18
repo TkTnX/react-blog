@@ -14,7 +14,7 @@ const FullPost: React.FC = () => {
   try {
     useEffect(() => {
       window.scrollTo(0, 0);
-      axios.get(`${import.meta.env.URL}/posts/${id}`).then(({ data }) => {
+      axios.get(`${import.meta.env.VITE_URL}/posts/${id}`).then(({ data }) => {
         setData(data);
         setIsLoading(false);
       });

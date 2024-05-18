@@ -47,7 +47,7 @@ const Registration: React.FC = () => {
       const file = event.target.files[0];
       formData.append("image", file);
       const { data } = await axios.post(
-        `${import.meta.env.URL}/avatars`,
+        `${import.meta.env.VITE_URL}/avatars`,
         formData
       );
       setAvatarUrl(data.url);
@@ -74,7 +74,10 @@ const Registration: React.FC = () => {
           {avatarUrl === "" ? (
             <img src={userImg} alt="user" />
           ) : (
-            <img src={`https://react-blog-rrdj.onrender.com${avatarUrl}`} alt="user" />
+            <img
+              src={`https://react-blog-rrdj.onrender.com${avatarUrl}`}
+              alt="user"
+            />
           )}
         </button>
         <input
