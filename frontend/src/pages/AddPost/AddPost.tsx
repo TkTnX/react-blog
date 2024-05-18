@@ -31,7 +31,7 @@ const AddPost: React.FC = () => {
       const file = event.target.files[0];
       formData.append("image", file);
       const { data } = await axios.post(
-        `${import.meta.env.VITE_URL}/upload`,
+        `${import.meta.env.VITE_URL}/uploads`,
         formData
       );
       setImageUrl(data.url);
