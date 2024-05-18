@@ -2,6 +2,8 @@ import express from "express";
 import multer from "multer";
 import mongoose from "mongoose";
 import cors from "cors";
+import fs from "fs";
+import path from "path";
 import {
   loginValidation,
   postCreateValidation,
@@ -21,6 +23,12 @@ mongoose
   );
 
 const app = express();
+
+// Ensure the uploads directory exists
+const UPLOADS_DIR = path.join(__dirname, "uploads");
+if (!fs.existsSync(UPLOADS_DIR)) {
+  fs.mkdirSync(UPLOADS_DIR, { recursive: true });
+}
 
 const storage = multer.diskStorage({
   destination: (_, __, cb) => {
