@@ -46,7 +46,10 @@ const Registration: React.FC = () => {
       // @ts-ignore
       const file = event.target.files[0];
       formData.append("image", file);
-      const { data } = await axios.post("/avatars", formData);
+      const { data } = await axios.post(
+        `${import.meta.env.URL}/avatars`,
+        formData
+      );
       setAvatarUrl(data.url);
     } catch (error) {
       console.log(error);

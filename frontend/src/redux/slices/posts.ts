@@ -2,20 +2,20 @@ import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "../../axios";
 
 export const fetchPosts = createAsyncThunk("posts/fetchPosts", async () => {
-  const { data } = await axios.get("/posts");
+  const { data } = await axios.get(`${import.meta.env.URL}/posts`);
 
   return data;
 });
 
 export const fetchTags = createAsyncThunk("tags/fetchTags", async () => {
-  const { data } = await axios.get("/tags");
+  const { data } = await axios.get(`${import.meta.env.URL}/tags`);
 
   return data;
 });
 
 export const fetchRemovePost = createAsyncThunk(
   "posts/fetchRemovePost",
-  async (id) => await axios.delete(`/posts/${id}`)
+  async (id) => await axios.delete(`${import.meta.env.URL}/posts/${id}`)
 );
 
 const initialState = {

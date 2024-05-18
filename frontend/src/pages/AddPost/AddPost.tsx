@@ -30,7 +30,10 @@ const AddPost: React.FC = () => {
       // @ts-ignore
       const file = event.target.files[0];
       formData.append("image", file);
-      const { data } = await axios.post("/upload", formData);
+      const { data } = await axios.post(
+        `${import.meta.env.URL}/upload`,
+        formData
+      );
       setImageUrl(data.url);
     } catch (error) {
       console.log(error);
@@ -48,8 +51,8 @@ const AddPost: React.FC = () => {
       };
 
       const { data } = isEditing
-        ? await axios.patch(`/posts/${id}`, fields)
-        : await axios.post("/posts", fields);
+        ? await axios.patch(`${import.meta.env.URL}/posts/${id}`, fields)
+        : await axios.post(`${import.meta.env.URL}/posts`, fields);
       const _id = isEditing ? id : data._id;
       navigate(`/post/${_id}`);
     } catch (error) {

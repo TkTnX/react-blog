@@ -3,12 +3,18 @@ import { RootState } from "../store";
 import axios from "../../axios";
 
 export const fetchAuth = createAsyncThunk("auth/fetchAuth", async (params) => {
-  const { data } = await axios.post("/auth/login", params);
+  const { data } = await axios.post(
+    `${import.meta.env.URL}/auth/login`,
+    params
+  );
   return data;
 });
 
 export const fetchRegister = createAsyncThunk("auth/fetchRegister", async (params) => {
-  const { data } = await axios.post("/auth/register", params);
+  const { data } = await axios.post(
+    `${import.meta.env.URL}/auth/register`,
+    params
+  );
   return data;
 });
 
@@ -16,7 +22,7 @@ export const fetchRegister = createAsyncThunk("auth/fetchRegister", async (param
 export const fetchAuthMe = createAsyncThunk(
   "auth/fetchAuthMe",
   async () => {
-    const { data } = await axios.get("/auth/me");
+    const { data } = await axios.get(`${import.meta.env.URL}/auth/me`);
     return data;
   }
 );
