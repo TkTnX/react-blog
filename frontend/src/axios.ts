@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const instance = axios.create({
-  baseURL: "https://react-blog-rrdj.onrender.com",
+  baseURL: import.meta.env.URL,
 });
 
 // @ts-ignore
